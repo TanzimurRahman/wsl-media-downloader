@@ -1,6 +1,6 @@
 #  WSL Media Downloader
 
-A high-speed, multi-threaded universal media downloader built on top of WSL (Ubuntu), `yt-dlp`, `aria2`, `deno`, and `zsh`. Features a macOS-inspired terminal interface, browser bookmarklet 1-click integration, dynamic YouTube challenge solvers, and bulk queueing capabilities.
+A high-speed, multi-threaded universal media downloader built on top of WSL (Ubuntu), `yt-dlp`, `aria2`, `deno`, and `zsh`. Features a Nothing OS-inspired terminal interface, browser bookmarklet 1-click integration, dynamic YouTube challenge solvers, and bulk queueing capabilities.
 
 ## ⚡ Features
 - **Multi-threaded Acceleration:** Uses `aria2c` with 8 parallel connections for maximum bandwidth speeds.
