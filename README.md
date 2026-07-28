@@ -18,3 +18,15 @@ Inside your WSL (Ubuntu) terminal, install required tools:
 sudo apt update && sudo apt install aria2 unzip curl git -y
 curl -fsSL [https://deno.land/install.sh](https://deno.land/install.sh) | sh
 pip3 install -U "yt-dlp[default]"
+
+## 🔑 Authentication & Cookie Support
+
+For sites that require account logins (such as **Instagram**, **Facebook**, or **Age-Restricted YouTube videos**), the script automatically detects and loads a `cookies.txt` file.
+
+### How to set up cookies:
+1. Install the browser extension **Get cookies.txt LOCALLY** (Chrome / Firefox / Edge).
+2. Log into the target site (e.g., Instagram) in your browser.
+3. Click the extension icon and click **Export / Download** to save `cookies.txt`.
+4. Place `cookies.txt` directly into your output directory (`Downloads/Media/cookies.txt`) or your home directory (`~/cookies.txt`).
+
+> **Note:** `.gitignore` is pre-configured to ignore `cookies.txt` so your private session tokens are **never** accidentally pushed to GitHub.
