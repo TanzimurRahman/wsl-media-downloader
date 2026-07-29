@@ -1,2 +1,2 @@
 @echo off
-wsl -e bash -c "~/ytdl.sh '%~1'"
+wsl -e bash ~/ytdl.sh "%~1"
