@@ -8,5 +8,6 @@ Windows Registry Editor Version 5.00
 
 [HKEY_CLASSES_ROOT\ytdl\shell\open]
 
+; IMPORTANT: Replace "C:\\Your\\Actual\\Path\\download-wsl.bat" with the actual path to your bat file!
 [HKEY_CLASSES_ROOT\ytdl\shell\open\command]
-@="\"C:\\Scripts\\download-wsl.bat\" \"%1\""
+@="\"C:\\Your\\Actual\\Path\\download-wsl.bat\" \"%1\""
