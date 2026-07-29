@@ -13,6 +13,11 @@ GRAY='\033[38;5;244m'         # Tech Gray
 DARK_GRAY='\033[38;5;238m'    # Subtle Frame Gray
 BOLD='\033[1m'
 NC='\033[0m'
+# --- Check required tools ---
+if ! command -v ffmpeg &> /dev/null; then
+    echo -e "${RED}[!] WARNING: ffmpeg is not installed. Video merging and audio conversion will fail.${NC}"
+    sleep 2
+fi
 
 # --- Auto-detect Windows Downloads Path ---
 WIN_PROFILE=$(cmd.exe /c "echo %USERPROFILE%" 2>/dev/null | tr -d '\r')
@@ -78,6 +83,13 @@ render_header() {
         echo -e "${RED}│${NC} ${GRAY}JS ENGINE     ::${NC} ${WHITE}[●] DENO ENGINE${NC}"
     else
         echo -e "${RED}│${NC} ${GRAY}JS ENGINE     ::${NC} ${GRAY}[○] INACTIVE${NC}"
+    fi
+
+    # --- PASTE THE FFMPEG CHECK HERE ---
+    if command -v ffmpeg &> /dev/null; then
+        echo -e "${RED}│${NC} ${GRAY}FFMPEG        ::${NC} ${WHITE}[●] INSTALLED${NC}"
+    else
+        echo -e "${RED}│${NC} ${GRAY}FFMPEG        ::${NC} ${RED}[○] MISSING (AUDIO/CONVERSION DISABLED)${NC}"
     fi
 
     echo -e "${RED}│${NC} ${GRAY}ACCELERATION  ::${NC} ${WHITE}[●] ARIA2 MULTI-THREAD (8x)${NC}"
