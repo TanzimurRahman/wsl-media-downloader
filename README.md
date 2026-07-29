@@ -13,11 +13,17 @@ A high-speed, multi-threaded universal media downloader built on top of WSL (Ubu
 ## 🚀 Setup Instructions
 
 ### 1. WSL Dependencies
-Inside your WSL (Ubuntu) terminal, install required tools:
+Inside your WSL (Ubuntu) terminal, install required system dependencies and Python tools:
+
 ```bash
-sudo apt update && sudo apt install aria2 unzip curl git -y
+# Update packages & install CLI dependencies
+sudo apt update && sudo apt install aria2 ffmpeg unzip curl git python3-pip -y
+
+# Install Deno JS runtime (for YouTube challenge bypass)
 curl -fsSL [https://deno.land/install.sh](https://deno.land/install.sh) | sh
-pip3 install -U "yt-dlp[default]"
+
+# Install yt-dlp & gallery-dl
+pip3 install -U "yt-dlp[default]" gallery-dl
 
 ## 🔑 Authentication & Cookie Support
 
