@@ -15,11 +15,11 @@ BOLD='\033[1m'
 NC='\033[0m'
 
 # --- Auto-detect Windows Downloads Path ---
-WIN_USER=$(cmd.exe /c "echo %USERNAME%" 2>/dev/null | tr -d '\r')
-if [ -z "$WIN_USER" ]; then
-    DOWNLOAD_DIR="$HOME/Downloads/Media"
+WIN_PROFILE=$(cmd.exe /c "echo %USERPROFILE%" 2>/dev/null | tr -d '\r')
+if [ -n "$WIN_PROFILE" ]; then
+    DOWNLOAD_DIR="$(wslpath "$WIN_PROFILE")/Downloads/Media"
 else
-    DOWNLOAD_DIR="/mnt/c/Users/$WIN_USER/Downloads/Media"
+    DOWNLOAD_DIR="$HOME/Downloads/Media"
 fi
 
 mkdir -p "$DOWNLOAD_DIR"
