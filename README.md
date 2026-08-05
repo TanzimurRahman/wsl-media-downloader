@@ -20,10 +20,11 @@ Inside your WSL (Ubuntu) terminal, install required system dependencies and Pyth
 sudo apt update && sudo apt install aria2 ffmpeg unzip curl git python3-pip -y
 
 # Install Deno JS runtime (for YouTube challenge bypass)
-curl -fsSL [https://deno.land/install.sh](https://deno.land/install.sh) | sh
+curl -fsSL https://deno.land/install.sh | sh
 
 # Install yt-dlp & gallery-dl
 pip3 install -U "yt-dlp[default]" gallery-dl
+```
 
 ## 🔑 Authentication & Cookie Support
 
@@ -33,9 +34,18 @@ For sites that require account logins (such as **Instagram**, **Facebook**, or *
 1. Install the browser extension **Get cookies.txt LOCALLY** (Chrome / Firefox / Edge).
 2. Log into the target site (e.g., Instagram) in your browser.
 3. Click the extension icon and click **Export / Download** to save `cookies.txt`.
-4. Place `cookies.txt` directly into your output directory (`Downloads/Media/cookies.txt`) or your home directory (`~/cookies.txt`).
+4. Copy it into WSL at the protected location:
+   ```bash
+   mkdir -p ~/.config/yt-dlp
+   cp /mnt/c/Users/<YourUsername>/Downloads/cookies.txt ~/.config/yt-dlp/cookies.txt
+   chmod 600 ~/.config/yt-dlp/cookies.txt
+   ```
+   (or drop it into `Downloads/Media/cookies.txt` — the newest copy is selected automatically)
 
 > **Note:** `.gitignore` is pre-configured to ignore `cookies.txt` so your private session tokens are **never** accidentally pushed to GitHub.
+
+> **Tip:** The downloader auto-detects the **newest** `cookies.txt` across `~/.config/yt-dlp/`, `Downloads/Media/`, and `~/`.
+
 ## Quick Access Setup
 
 To make using this tool more convenient, you can set up quick access shortcuts on your Windows desktop and inside your web browser. Follow the instructions below based on your preference.

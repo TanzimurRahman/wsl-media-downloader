@@ -35,11 +35,12 @@ YTDLP_ARGS=(-N 8 --remote-components ejs:npm --js-runtimes deno)
 GALLERY_ARGS=()
 COOKIE_FILE=""
 
-if [ -f "$DOWNLOAD_DIR/cookies.txt" ]; then
-    COOKIE_FILE="$DOWNLOAD_DIR/cookies.txt"
-elif [ -f "$HOME/cookies.txt" ]; then
-    COOKIE_FILE="$HOME/cookies.txt"
-fi
+# --- Cookie Detection: newest of protected + legacy paths wins ---
+for candidate in "$HOME/.config/yt-dlp/cookies.txt" "$DOWNLOAD_DIR/cookies.txt" "$HOME/cookies.txt"; do
+    if [ -f "$candidate" ] && { [ -z "$COOKIE_FILE" ] || [ "$candidate" -nt "$COOKIE_FILE" ]; }; then
+        COOKIE_FILE="$candidate"
+    fi
+done
 
 if [ -n "$COOKIE_FILE" ]; then
     YTDLP_ARGS+=(--cookies "$COOKIE_FILE")
@@ -200,6 +201,16 @@ fi
 
 echo ""
 echo -e "${RED}[●] ENGINE STARTING...${NC}\n"
+
+# --- Pre-flight: ffmpeg is required for MP3/M4A extraction ---
+if [ "$choice" = "4" ] || [ "$choice" = "04" ] || [ "$choice" = "5" ] || [ "$choice" = "05" ]; then
+    if ! command -v ffmpeg >/dev/null 2>&1; then
+        echo -e "${RED}[!] ffmpeg NOT INSTALLED${NC} ${WHITE}- MP3/M4A extraction requires it.${NC}"
+        echo -e "${GRAY}    Install with: sudo apt install -y ffmpeg${NC}"
+        read -rp "PRESS ENTER TO EXIT."
+        exit 1
+    fi
+fi
 
 count=1
 total=${#URL_LIST[@]}
